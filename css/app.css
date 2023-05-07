@@ -1,0 +1,294 @@
+#main {
+    width: 100%;
+    height: 100%;
+    border: round aqua;
+    layout: horizontal;
+}
+
+#outer {
+    width: 100%;
+    height: 100%;
+    border: round rgb(248, 162, 49);
+    layout: horizontal;
+}
+
+CommitScreen {
+    align: center middle;
+}
+
+WelcomeScreen{
+    width: 100%;
+    height: 100%;
+    align: center middle;
+}
+
+ResultScreen {
+    align: center middle;
+}
+
+RefreshScreen {
+    align: center middle;
+}
+
+WaitScreen {
+    align: center middle;
+}
+
+ErrScreen {
+    align: center middle;
+}
+
+#SearchScreen {
+    width: 100%;
+    height: 100%;
+}
+
+
+#dialog {
+    grid-size: 2;
+    grid-gutter: 1 2;
+    grid-rows: 1fr 3;
+    padding: 0 1;
+    width: 60;
+    height: 11;
+    border: thick $background 80%;
+    background: $surface;
+    content-align: center middle;
+}
+
+#wait {
+    padding: 0 1;
+    width: 60;
+    height: 11;
+    border: thick $background 80%;
+    background: $surface;
+    content-align: center middle;
+}
+
+#question {
+    column-span: 2;
+    height: 1fr;
+    width: 1fr;
+    content-align: center middle;
+}
+
+
+#buttons {
+    background: $panel;
+    height: 100%;
+    width: 15%;
+    border: round $primary;
+}
+
+Button {
+    width: 100%;
+    align: center middle;
+}
+
+Button .switcher {
+    margin: 1 1 1 1;
+    align: left middle;
+}
+
+#save {
+    margin: 0 1 0 1;
+    width: 80%;
+    align: center middle;
+}
+
+#refresh {
+    margin: 0 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+#Slogin {
+    margin: 1 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+#Slogout {
+    margin: 1 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+#welcomearea {
+    background: $panel;
+    border: round $primary;
+    width: 83%;
+    height: 100%;
+    border-title-align: center;
+}
+
+.title {
+    content-align: left bottom;
+    border-bottom: solid aquamarine;
+    margin: 0 0 0 1;
+    width: 70%;
+}
+
+.text {
+    content-align: left bottom;
+    
+    margin: 0 0 0 2;
+    width: 90%;
+}
+
+.InputContainer {
+    layout: horizontal;
+    width: 100%;
+    height: auto;
+    align: left middle;
+    content-align: left middle;
+    padding: 0 1 1 1;
+}
+
+.InputContainer Label {
+    width: auto;
+    align: left middle;
+    content-align: left middle;
+}
+
+.InputContainer Input {
+    width: 80%;
+}
+
+
+#warning{
+    content-align: center middle;
+    width: auto;
+    color: red;
+}
+
+#block {
+    width: 100%;
+    height: 100%;
+    content-align: center middle;
+}
+
+#userinfo {
+    background: $panel;
+    height: 100%;
+    width: 100%;
+}
+
+#choosearea {
+    layout: grid;
+    grid-size: 4;
+    width: 80%;
+    height: 7fr;
+    padding: 0 0 0 1;
+    border: round rgb(30, 248, 219);
+}
+
+#chooseareap {
+    layout: grid;
+    grid-size: 2;
+    width: 60%;
+    height: 7w;
+    padding: 0 0 0 1;
+    border: round rgb(30, 248, 219);
+}
+
+.ListContainer {
+    layout: horizontal;
+    width: 4fr;
+    height: 7fr;
+    align: left middle;
+    content-align: left middle;
+    padding: 0 1 0 0;
+}
+
+.ListContainer OptionList {
+    width: 3fr;
+    height: auto;
+}
+
+#long {
+    column-span: 2;
+}
+
+#swarea {
+    layout: grid;
+    grid-size: 2;
+    width: 70%;
+    height: 8fr;
+    border: round rgb(0, 255, 98);
+    padding: 0 0 0 1;
+}
+
+.SwContainer {
+    layout: horizontal;
+    width: auto;
+    height: 5fr;
+    align: left middle;
+    content-align: left middle;
+}
+
+#odarea {
+    layout: grid;
+    grid-size: 2;
+    width: 70%;
+    height: 18fr;
+    border: round rgb(198, 255, 65);
+    padding: 0 0 0 1;
+}
+
+.OdContainer {
+    layout: horizontal;
+    width: 100%;
+    height: 3fr;
+    align: left middle;
+    content-align: left middle;
+}
+
+.OdContainer Input{
+    width: 6fr;
+}
+
+#od {
+    column-span: 2;
+}
+
+#star {
+    column-span: 2;
+}
+
+#date {
+    column-span: 2;
+}
+
+#SSearch {
+    margin: 0 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+#SSearchp {
+    margin: 0 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+DataTable {
+    background: $panel;
+}
+
+#maptable {
+    width: 99%;
+    height: 85%;
+    border: round rgb(65, 255, 122);
+}
+
+#download {
+    width: 99%;
+    height: auto;
+    align: center middle;
+}
+
+#searcharea {
+    height: auto;
+    width: 100%;
+}

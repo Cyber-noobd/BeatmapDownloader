@@ -1,0 +1,11 @@
+#dltable {
+    width: 99%;
+    height: 42%;
+    border: round rgb(65, 255, 122);
+}
+
+#progress {
+    width: 99%;
+    height: 42%;
+    border: round rgba(221, 25, 100, 0.685);
+}
