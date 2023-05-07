@@ -48,6 +48,7 @@ class WelcomeScreen(Screen):
                                 \n4.在下载页中设置搜索项目,进行搜索。
                                 \n5.在搜索结果页确认下载 等待下载完成。
                                 \n6.(可选性 建议进行)在关闭下图器前在登录页中登出。\n""", classes="text")
-                    yield Label("""
-                                By 码的很烂的Yuria""", classes="text")
+                    yield Label("""By 码的很烂的Yuria
+                                \n觉得好用可以去Github上点个⭐(
+                                \nhttps://github.com/Cyber-noobd/Beatmap-Downloader""", classes="text")
             yield Footer()
