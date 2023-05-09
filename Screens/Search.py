@@ -45,6 +45,7 @@ class SearchScreen(Screen):
                                 name="query", placeholder="与官网搜索相同"),
                             classes="InputContainer",
                         )
+                        yield Label("※ 排序不为最相关时,搜索结果很可能与输入不符", classes="warning")
                         yield Grid(
                             Container(
                                 Label("Rank状态:"),
@@ -66,7 +67,7 @@ class SearchScreen(Screen):
                             ),
                             Container(
                                 Label("排序:"),
-                                OptionList("相关性由高到低", "由新到旧", "由旧到新","评分从高到低","评分从低到高","难度从高到低","难度从低到高", name="sort"),
+                                OptionList("最相关", "由新到旧", "由旧到新","评分从高到低","评分从低到高","难度从高到低","难度从低到高", name="sort"),
                                 classes="ListContainer",
                             ),
                             id="choosearea"
