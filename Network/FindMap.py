@@ -2,6 +2,7 @@ import httpx
 import json
 import time
 from Local.OsuTools import OsuTools
+from textual import log
 
 class MapFinder:
     url = "https://osu.ppy.sh/beatmapsets/search"
@@ -12,20 +13,10 @@ class MapFinder:
     local_map = OsuTools.GetSidList(OsuTools.OsuLocation())
     
     def SetParams(self, inparams: dict, num: int):
-        self.conf['params'] = {
-            "e": inparams.get('e'),  # video and sb
-            "c": inparams.get('c'),  # recommended
-            "g": inparams.get('g'),  # useless
-            "l": inparams.get('l'),  # useless
-            "m": inparams.get('m'),  # mode 0 1 2 3
-            "nsfw": inparams.get('nsfw'),  # none or false
-            "q": inparams.get('q'),  # 搜索项 虽然但是 哪都没写这东西的附带参数
-            "r": inparams.get('r'),  # 成绩 useless
-            "sort": inparams.get('sort'),  # 排序 plays_desc useless?
-            "s": inparams.get('s'),  # 分类 留空rank+ loved
-            "played": inparams.get('played'),  # supporter only
-            "cursor_string": inparams.get('cs'),  # 分页
-        }
+        log("inparams:" + str(inparams))
+        for key in ["e","c","g","l","m","nsfw","q","r","sort","s"]:
+            if inparams.get(key):
+                self.conf['params'][key] = inparams[key]
         self.conf['num'] = num
         
     def UpdateCs(self, cs):
@@ -35,6 +26,7 @@ class MapFinder:
         """
         仅应当在登录后调用
         """
+        log("params:" + str(self.conf['params']))
         meta = json.loads(client.get(self.url, params=self.conf['params']).content)
         self.UpdateCs(meta.get('cursor_string'))
         beatmapsets = meta.get('beatmapsets') # list
@@ -198,6 +190,7 @@ class MapFinder:
         result = []
         while len(result) < self.conf['num']:
             result += self.Search(client)
+        self.conf["params"] = {}
         return result[:self.conf['num']]
     
 

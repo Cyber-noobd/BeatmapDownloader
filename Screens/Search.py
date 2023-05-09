@@ -137,7 +137,6 @@ class SearchScreen(Screen):
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "SSearch":
-            log(self.params)
             input_save = {
                 'query': self.params.get('query'),
                 'od': self.params.get('od'),
@@ -157,15 +156,11 @@ class SearchScreen(Screen):
                 c += "."
             if self.params.get('re_diff'):
                 c += "recommended"
-            nsfw = None
-            if self.params.get('NONSFW'):
-                nsfw = 'false'
-            sort = 'ranked_desc'
-            if self.params.get('sort'):
-                sort = 'ranked_asc'
+            nsfw = 'false' if self.params.get('NONSFW') else ""
+            sort = 'ranked_asc' if self.params.get('sort') else'ranked_desc'
             q = self.params.get('query') + " " if self.params.get('query') else " "
-            m = [None, 0, 1, 2, 3]
-            s = [None, "ranked", "qualified", "loved"]
+            m = ["", '0', '1', '2', '3']
+            s = ["", "ranked", "qualified", "loved"]
             if self.params.get('od'):
                 try:
                     a, b = self.params.get('od').split(":")
@@ -194,7 +189,6 @@ class SearchScreen(Screen):
                         q += " cs>={0} cs<={1}".format(a, b)
                 except:
                     pass
-            sort = 'ranked_desc'
             if self.params.get('date'):
                 try:
                     a, b = self.params.get('date').split("-")
@@ -202,14 +196,16 @@ class SearchScreen(Screen):
                         q += " ranked>{0} ranked<{1}".format(a, b)
                 except:
                     pass
+            if q[-1] == " ":
+                q = q[:-1]
             oparams = {
-                "e": e[self.params.get('sb')] if self.params.get('sb') else None,  # video and sb
+                "e": e[self.params.get('sb')] if self.params.get('sb') else "",  # video and sb
                 "c": c,  # recommended
-                "m": m[self.params.get('mode')] if self.params.get('mode') else None,  # mode 0 1 2 3
-                "nsfw": None or nsfw,  # none or false
+                "m": m[self.params.get('mode')] if self.params.get('mode') else "",  # mode 0 1 2 3
+                "nsfw": nsfw ,  # none or false
                 "q": q,  # 搜索项
                 "sort": sort,  # 排序 
-                "s": s[self.params.get('status')] if self.params.get('status') else None,  # 分类 留空rank+ loved
+                "s": s[self.params.get('status')] if self.params.get('status') else "",  # 分类 留空rank+ loved
             }
             m = MapFinder()
             m.SetParams(oparams, int(conf.LoadConfig().get('dl_num')))
