@@ -45,7 +45,7 @@ class SearchScreen(Screen):
                                 name="query", placeholder="与官网搜索相同"),
                             classes="InputContainer",
                         )
-                        yield Label("※ 排序不为最相关时,搜索结果很可能与输入不符", classes="warning")
+                        yield Label("※ 排序不为最相关时,搜索结果很可能与输入不符", id="warning")
                         yield Grid(
                             Container(
                                 Label("Rank状态:"),
