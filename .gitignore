@@ -1,5 +1,9 @@
 *.pyc
+*.pyd
 *.json
-./venv
+/.venv
 */__pycache__
 test.py
+/build
+/dist
+*.spec
