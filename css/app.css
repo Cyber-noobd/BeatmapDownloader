@@ -131,13 +131,21 @@ Button .switcher {
 
 .text {
     content-align: left bottom;
-    
     margin: 0 0 0 2;
     width: 90%;
 }
 
 .InputContainer {
     layout: horizontal;
+    width: 100%;
+    height: auto;
+    align: left middle;
+    content-align: left middle;
+    padding: 0 1 1 1;
+}
+
+.InputContainerm {
+    layout: vertical;
     width: 100%;
     height: auto;
     align: left middle;
@@ -157,6 +165,7 @@ Button .switcher {
 
 
 #warning{
+    margin: 0 0 0 1;
     content-align: center middle;
     width: auto;
     color: red;
@@ -188,6 +197,15 @@ Button .switcher {
     grid-size: 2;
     width: 60%;
     height: 7w;
+    padding: 0 0 0 1;
+    border: round rgb(30, 248, 219);
+}
+
+#chooseaream {
+    layout: grid;
+    grid-size: 1;
+    width: 20w;
+    height: 4w;
     padding: 0 0 0 1;
     border: round rgb(30, 248, 219);
 }
@@ -267,6 +285,12 @@ Button .switcher {
 }
 
 #SSearchp {
+    margin: 0 1 1 1;
+    width: 30%;
+    align: center middle;
+}
+
+#SSearchm {
     margin: 0 1 1 1;
     width: 30%;
     align: center middle;

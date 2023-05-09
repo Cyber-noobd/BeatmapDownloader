@@ -53,10 +53,12 @@ class RefreshScreen(ModalScreen):
     @work(exclusive=False)
     def CreateWorker(self):
         log("worker begin working")
+        if self.app.u.islogined():
+            self.app.u.logout(self.app.r.client)
         self.app.r.Restart(WinProxy.ReadProxy())
         p = WinProxy.ReadProxy()
         usable = self.app.r.Test()
-        self.query_one("#question").update(f"现在使用的代理为:{p}\n测试结果:{usable}")
+        self.query_one("#question").update(f"现在使用的代理为:{p}\n测试结果:{usable}\n※ 需要重新登录")
         self.query_one("#r_commit").disabled = False
         
 class OptionScreen(Screen):
@@ -73,6 +75,7 @@ class OptionScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     yield Label("Osu!", classes="title")
                     yield Container(

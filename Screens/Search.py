@@ -35,6 +35,7 @@ class SearchScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     with VerticalScroll(id="searcharea"):
                         yield Label("搜索设置", classes="title")

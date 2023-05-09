@@ -16,6 +16,7 @@ class NoSettingScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     yield Label("请先进行设置!", id="warning")
             yield Footer()
@@ -48,6 +49,7 @@ class LoginedScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     yield Label("现在登录为:[green]{}[green]".format(conf.LoadConfig().get('username')))
                     yield Button("登出", variant="error", id="Slogout")
@@ -74,6 +76,7 @@ class LoginScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     if not conf.CheckConfig():
                         yield Label("请先进行设置!", id="warning")

@@ -20,9 +20,10 @@ class ErrScreen(ModalScreen):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         self.app.pop_screen()
 
-class SearchpScreen(Screen):
+class SearchmScreen(Screen):
     params = {}
-    
+    save = conf.LoadSearchSave()
+
     def compose(self) -> ComposeResult:
         with Container(id='outer'):
             yield Header()
@@ -42,26 +43,20 @@ class SearchpScreen(Screen):
                             yield Label("单次最大下载150首!\n", id="warning")
                             yield Label("搜索设置", classes="title")
                             yield Container(
-                                Label("\n指定ID:"),
-                                Input(name="pname", placeholder="某人的Osu!名称"),
-                                classes="InputContainer",
+                                Label("bid或sid(注意区分):\n"),
+                                Input(name="mid", placeholder="谱面/图包id  id1,id2,.."),
+                                classes="InputContainerm",
                             )
                             yield Grid(
                                 Container(
                                     Label("类型:"),
-                                    OptionList("BP", "上传谱面", name="ptype"),
+                                    OptionList("bid", "sid", name="mtype"),
                                     classes="ListContainer",
                                     id="type"
                                 ),
-                                Container(
-                                    Label("模式(BP):"),
-                                    OptionList("all", "osu", "taiko",
-                                            "catch", "mania", name="pmode"),
-                                    classes="ListContainer",
-                                ),
-                                id="chooseareap"
+                                id="chooseaream"
                             )
-                            yield Button("开始搜索", variant="success", id="SSearchp")
+                            yield Button("开始搜索", variant="success", id="SSearchm")
             yield Footer()
 
     def on_input_changed(self, event: Input.Changed) -> None:
@@ -72,21 +67,19 @@ class SearchpScreen(Screen):
         
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.button.id == "SSearchp":
-            if self.params.get('pname') != None:
-                q = self.params.get('pname')
-                t = ["bp", "up"]
-                m = ["all", "osu","taiko","fruits","mania"]
+        if event.button.id == "SSearchm":
+            if self.params.get('mid') != None:
+                q = self.params.get('mid').replace(" ", "").replace("，", "").split(',')
+                t = ["bid", "sid"]
                 oparams = {
-                    "m": m[self.params.get('pmode')] if self.params.get('pmode') else "all",
-                    "t": t[self.params.get('ptype')] if self.params.get('ptype') else t[0],
+                    "t": t[self.params.get('mtype')] if self.params.get('mtype') else t[0],
                     "q": q,
                     "cid": conf.LoadConfig().get('client_id'),
                     "ckey": conf.LoadConfig().get('client_key')
                 }
                 m = MapFinder()
                 try:
-                    self.app.Mapset = m.Searchp(oparams,self.app.r.client)
+                    self.app.Mapset = m.Searchm(oparams,self.app.r.client)
                     self.app.push_screen(TableScreen())
                 except Exception as e:
                     log(e)

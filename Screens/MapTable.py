@@ -17,6 +17,7 @@ class TableScreen(Screen):
                     yield Button("登录", id="login", classes="switcher")
                     yield Button("下载(搜索)", id="search", classes="switcher")
                     yield Button("下载(指定个人)", id="searchp", classes="switcher")
+                    yield Button("下载(指定id)", id="searchm", classes="switcher")
                 with Container(id="welcomearea"):
                     yield DataTable(id="maptable")
                     yield Button("确认下载", variant="success", id="download")

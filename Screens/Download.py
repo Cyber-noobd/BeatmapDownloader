@@ -74,6 +74,7 @@ class DownloadScreen(Screen):
                     yield Button("登录", id="login", classes="switcher", disabled=True)
                     yield Button("下载(搜索)", id="search", classes="switcher", disabled=True)
                     yield Button("下载(指定个人)", id="searchp", classes="switcher", disabled=True)
+                    yield Button("下载(指定id)", id="searchm", classes="switcher", disabled=True)
                 with Container(id="welcomearea"):
                     yield DataTable(id="dltable")
                     yield RichProgress(id="progress")
@@ -94,7 +95,9 @@ class DownloadScreen(Screen):
         with ThreadPoolExecutor(max_workers=4) as nigger:
             all_tasks = []
             for mps in self.app.Mapset:
-                log(self.path)
+                if type(mps[1])==str:
+                    self.post_message(DLAdvance("总进度", 1))
+                    continue
                 all_tasks.append(nigger.submit(self.job, mps[1], mps[0], False))
                 time.sleep(0.5)
             for future in as_completed(all_tasks):

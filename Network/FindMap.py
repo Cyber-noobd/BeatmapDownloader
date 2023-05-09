@@ -131,7 +131,7 @@ class MapFinder:
                             tag = tags
                         mapper = bset.get('creator')
                         diffs = sorted([i.get('difficulty_rating') for i in bset.get('beatmaps')])
-                        result.append((title, sid, mode, artist, mapper, str(diffs).replace('[','').replace(']',''), tag))
+                        result.append((title, sid, mode, artist, mapper, str(diffs).replace('[','').replace(']',''), str(tag)))
                 if len(maps) < 100:
                     break
         return result
@@ -155,7 +155,44 @@ class MapFinder:
         if len(result)>150:
             return result[:150]
         else:return result
-            
+        
+    def getMapBySid(self,sid,client,headers):
+        url = f"https://osu.ppy.sh/api/v2/beatmapsets/{sid}"
+        back = json.loads(client.get(url, headers=headers).content)
+        sid = back.get('id')
+        if sid in self.local_map:
+            sid = "*已有 " + str(sid)
+        artist = back.get('artist_unicode')
+        mode = back.get('beatmaps')[0].get('mode')
+        title = back.get('title_unicode')
+        tags = back.get('tags') if back.get('tags') else back.get("source")
+        if len(tags.split(' '))>5:
+            tag = tags.split(' ')[:5]
+        else:
+            tag = tags
+        mapper = back.get('creator')
+        diffs = sorted([i.get('difficulty_rating') for i in back.get('beatmaps')])
+        return (title, sid, mode, artist, mapper, str(diffs).replace('[','').replace(']',''), str(tag).replace('[','').replace(']',''))
+
+    def BidToSid(self,mid, client, headers):
+        url = f"https://osu.ppy.sh/api/v2/beatmaps/{mid}"
+        return json.loads(client.get(url, headers=headers).content).get("beatmapset_id")
+        
+    def Searchm(self,params, client: httpx.Client):
+        headers = self.getPass(params.get('cid'),params.get('ckey'),client)
+        t = params.get('t')
+        q = params.get('q')
+        result = []
+        if t == "sid":
+            for mid in q:
+                result.append(self.getMapBySid(mid,client, headers))
+        else:
+            for mid in q:
+                result.append(self.getMapBySid(self.BidToSid(mid, client, headers), client, headers))
+        client.request("DELETE","https://osu.ppy.sh/api/v2/oauth/tokens/current", headers=headers)
+        if len(result)>150:
+            return result[:150]
+        else:return result
     
     def CreateMapList(self, client: httpx.Client):
         result = []

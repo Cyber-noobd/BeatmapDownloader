@@ -5,6 +5,7 @@ import Screens.Options
 import Screens.Login
 import Screens.Search
 import Screens.Searchp
+import Screens.Searchm
 import Screens.MapTable
 from Network.WinProxy import WinProxy
 from Network.MainHttpReactor import Reactor
@@ -23,7 +24,8 @@ class BeatMapDownloader(App[str]):
             "logined": Screens.Login.LoginedScreen(),
             "nologin": Screens.Welcome.NotloginScreen(),
             "search": Screens.Search.SearchScreen(),
-            "searchp": Screens.Searchp.SearchpScreen()
+            "searchp": Screens.Searchp.SearchpScreen(),
+            "searchm": Screens.Searchm.SearchmScreen(),
         }
     r = Reactor(WinProxy.ReadProxy())
     u = VUser()
@@ -35,7 +37,7 @@ class BeatMapDownloader(App[str]):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if 'switcher' in event.button.classes:
             screen_id = "logined" if event.button.id == 'login' and self.u.islogined() else event.button.id
-            if screen_id in ["search", "searchp"] and not self.u.islogined():
+            if screen_id in ["search", "searchp", "searchm"] and not self.u.islogined():
                 screen_id = 'nologin'
             if screen_id == "login" and not conf.CheckConfig():
                 screen_id = 'noset'
