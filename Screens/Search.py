@@ -64,6 +64,11 @@ class SearchScreen(Screen):
                                 OptionList("默认", "有视频", "有故事板", "都有", name="sb"),
                                 classes="ListContainer",
                             ),
+                            Container(
+                                Label("排序:"),
+                                OptionList("相关性由高到低", "由新到旧", "由旧到新","评分从高到低","评分从低到高","难度从高到低","难度从低到高", name="sort"),
+                                classes="ListContainer",
+                            ),
                             id="choosearea"
                         )
                         yield Grid(
@@ -80,11 +85,6 @@ class SearchScreen(Screen):
                             Container(
                                 Label("\n仅精选艺术家:"),
                                 Switch(animate=False, name="FA"),
-                                classes="SwContainer",
-                            ),
-                            Container(
-                                Label("\n按时间升序排列:"),
-                                Switch(animate=False, name="sort"),
                                 classes="SwContainer",
                             ),
                             id="swarea"
@@ -148,8 +148,9 @@ class SearchScreen(Screen):
             with open('SearchSave.json', 'w') as f:
                 json.dump(input_save, f)
                 f.close()
-            e = [None, 'video', 'storyboard', 'video.storyboard']
+            e = ["", 'video', 'storyboard', 'video.storyboard']
             c = ""
+            so = ["relevance_desc", "ranked_desc", "ranked_asc", "rating_desc", "rating_asc", "difficulty_desc", "difficulty_asc"]
             if self.params.get('FA'):
                 c += "featured_artists"
             if self.params.get('re_diff') and self.params.get('FA'):
@@ -157,7 +158,6 @@ class SearchScreen(Screen):
             if self.params.get('re_diff'):
                 c += "recommended"
             nsfw = 'false' if self.params.get('NONSFW') else ""
-            sort = 'ranked_asc' if self.params.get('sort') else'ranked_desc'
             q = self.params.get('query') + " " if self.params.get('query') else " "
             m = ["", '0', '1', '2', '3']
             s = ["", "ranked", "qualified", "loved"]
@@ -204,7 +204,7 @@ class SearchScreen(Screen):
                 "m": m[self.params.get('mode')] if self.params.get('mode') else "",  # mode 0 1 2 3
                 "nsfw": nsfw ,  # none or false
                 "q": q,  # 搜索项
-                "sort": sort,  # 排序 
+                "sort": so[self.params.get('sort')] if self.params.get('sort') else 'relevance_desc',  # 排序 
                 "s": s[self.params.get('status')] if self.params.get('status') else "",  # 分类 留空rank+ loved
             }
             m = MapFinder()

@@ -5,10 +5,10 @@ from Local.OsuTools import OsuTools
 from textual import log
 
 class MapFinder:
-    url = "https://osu.ppy.sh/beatmapsets/search"
     conf = {
         "params": {},
-        "num": 0
+        "num": 0,
+        "q": ""
     }
     local_map = OsuTools.GetSidList(OsuTools.OsuLocation())
     
@@ -18,6 +18,7 @@ class MapFinder:
             if inparams.get(key):
                 self.conf['params'][key] = inparams[key]
         self.conf['num'] = num
+        self.conf['q'] = inparams.get("q") if inparams.get("q") else ""
         
     def UpdateCs(self, cs):
         self.conf['params']['cursor_string'] = cs
@@ -26,8 +27,11 @@ class MapFinder:
         """
         仅应当在登录后调用
         """
+        q = str(self.conf['q']).replace(" ", "%20")
+        url = f"https://osu.ppy.sh/beatmapsets/search?q={q}"
+        log(url)
         log("params:" + str(self.conf['params']))
-        meta = json.loads(client.get(self.url, params=self.conf['params']).content)
+        meta = json.loads(client.get(url,params=self.conf['params']).content)
         self.UpdateCs(meta.get('cursor_string'))
         beatmapsets = meta.get('beatmapsets') # list
         result = []
@@ -191,6 +195,7 @@ class MapFinder:
         while len(result) < self.conf['num']:
             result += self.Search(client)
         self.conf["params"] = {}
+        self.conf["q"] = ""
         return result[:self.conf['num']]
     
 
