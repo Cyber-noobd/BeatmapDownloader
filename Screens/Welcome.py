@@ -64,7 +64,7 @@ class WelcomeScreen(Screen):
         
     @work(exclusive=True)
     def getLatestVersion(self):
-        localVersion = "v0.1-beta"
+        localVersion = "v0.1-beta2"
         vl = self.query_one("#version")
         vl.update(f"当前版本:{localVersion} 最新版本:获取中\n")
         url = "https://api.github.com/repos/Cyber-noobd/BeatmapDownloader/releases"
