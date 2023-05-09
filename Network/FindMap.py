@@ -122,7 +122,7 @@ class MapFinder:
                         if sid in self.local_map:
                             continue
                         artist = bset.get('artist_unicode')
-                        mode = bset.get('mode')
+                        mode = bset.get('beatmaps')[0].get('mode')
                         title = bset.get('title_unicode')
                         tags = bset.get('tags') if bset.get('tags') else bset.get("source")
                         if len(tags.split(' '))>5:
