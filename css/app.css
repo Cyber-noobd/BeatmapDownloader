@@ -188,7 +188,7 @@ Button .switcher {
     grid-size: 2;
     width: 80%;
     height: 21fr;
-    padding: 0 1 0 1;
+    padding: 0 0 1 1;
     border: round rgb(30, 248, 219);
     align: left top;
     content-align: left top;
