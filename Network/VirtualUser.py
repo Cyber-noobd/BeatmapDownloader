@@ -49,6 +49,6 @@ if __name__ == "__main__":
     from WinProxy import WinProxy
     r =Reactor(WinProxy.ReadProxy())
     u = VUser()
-    u.login('[GB]Yuria',"Yur1ach2n",r.client)
+    u.login('',"",r.client)
     print(u.info)
-    u.logout()
+    u.logout(r.client)
